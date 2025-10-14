@@ -27,30 +27,30 @@
 #define TUSB_CONFIG_H_
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 // ------------usersetting----begin--------------//
-#define USE_CDC 0    /* 1 = 调试模式带CDC，0 = 生产模式纯HID */
-#define INTERVAL_MS 1//devices speed 1=1khz,2=500hz,4=250hz,8=125hz
+#define USE_CDC 0     /* 1 = 调试模式带CDC，0 = 生产模式纯HID */
+#define INTERVAL_MS 1 // devices speed 1=1khz,2=500hz,4=250hz,8=125hz
 
 // USB Vendor ID (VID) and Product ID (PID)
 // These should be obtained from USB-IF for a unique identification
-#define USB_VID 0x1234// Example VID
-#define USB_PID 0x4321// Example PID
+#define USB_VID 0x046D // Example VID
+#define USB_PID 0xC08B // Example PID
 
 // Device name, manufacturer, and serial number
-#define USB_MANUFACTURER "MY"   //生产商
-#define USB_PRODUCT "USB Device"//设备名
-#define USB_SERIAL_NUMBER "NA"  //SN
+#define USB_MANUFACTURER "Logitech"          // 生产商
+#define USB_PRODUCT "G502 HERO Gaming Mouse" // 设备名
+#define USB_SERIAL_NUMBER "S1F8M-2Q5KL-7CD"  // SN
 
 // Maximum power consumption in milliamps
-#define USB_MAX_POWER_MA 500//max <= 500
+#define USB_MAX_POWER_MA 500 // max <= 500
 
 // Firmware version
-#define USB_FIRMWARE_VERSION 0x0105// 固件版本
+#define USB_FIRMWARE_VERSION 0x0106 // 固件版本
 // ------------usersetting----end--------------//
-
 
 //--------------------------------------------------------------------+
 // Board Specific Configuration
@@ -58,22 +58,22 @@ extern "C" {
 
 // RHPort number used for device can be defined by board.mk, default to port 0
 #ifndef BOARD_TUD_RHPORT
-  #define BOARD_TUD_RHPORT 0
+#define BOARD_TUD_RHPORT 0
 #endif
 
 // RHPort max operational speed can defined by board.mk
 #ifndef BOARD_TUD_MAX_SPEED
-  #define BOARD_TUD_MAX_SPEED OPT_MODE_DEFAULT_SPEED
+#define BOARD_TUD_MAX_SPEED OPT_MODE_DEFAULT_SPEED
 #endif
 
 // RHPort number used for host can be defined by board.mk, default to port 1
 #ifndef BOARD_TUH_RHPORT
-  #define BOARD_TUH_RHPORT 1
+#define BOARD_TUH_RHPORT 1
 #endif
 
 // RHPort max operational speed can defined by board.mk
 #ifndef BOARD_TUH_MAX_SPEED
-  #define BOARD_TUH_MAX_SPEED OPT_MODE_DEFAULT_SPEED
+#define BOARD_TUH_MAX_SPEED OPT_MODE_DEFAULT_SPEED
 #endif
 
 //--------------------------------------------------------------------
@@ -82,15 +82,15 @@ extern "C" {
 
 // defined by compiler flags for flexibility
 #ifndef CFG_TUSB_MCU
-  #error CFG_TUSB_MCU must be defined
+#error CFG_TUSB_MCU must be defined
 #endif
 
 #ifndef CFG_TUSB_OS
-  #define CFG_TUSB_OS OPT_OS_NONE
+#define CFG_TUSB_OS OPT_OS_NONE
 #endif
 
 #ifndef CFG_TUSB_DEBUG
-  #define CFG_TUSB_DEBUG 0
+#define CFG_TUSB_DEBUG 0
 #endif
 
 // Enable Device stack, Default is max speed that hardware controller could support with on-chip PHY
@@ -102,8 +102,8 @@ extern "C" {
 #define CFG_TUH_MAX_SPEED BOARD_TUH_MAX_SPEED
 
 #if CFG_TUSB_MCU == OPT_MCU_RP2040
-  // Use pico-pio-usb as host controller for raspberry rp2040
-  #define CFG_TUH_RPI_PIO_USB 1
+// Use pico-pio-usb as host controller for raspberry rp2040
+#define CFG_TUH_RPI_PIO_USB 1
 #endif
 
 /* USB DMA on some MCUs can only access a specific SRAM region with restriction on alignment.
@@ -114,19 +114,19 @@ extern "C" {
  * - CFG_TUSB_MEM_ALIGN   : __attribute__ ((aligned(4)))
  */
 #ifndef CFG_TUD_MEM_SECTION
-  #define CFG_TUD_MEM_SECTION
+#define CFG_TUD_MEM_SECTION
 #endif
 
 #ifndef CFG_TUD_MEM_ALIGN
-  #define CFG_TUD_MEM_ALIGN __attribute__((aligned(4)))
+#define CFG_TUD_MEM_ALIGN __attribute__((aligned(4)))
 #endif
 
-//--------------------------------------------------------------------
-// DEVICE CONFIGURATION
-//--------------------------------------------------------------------
+  //--------------------------------------------------------------------
+  // DEVICE CONFIGURATION
+  //--------------------------------------------------------------------
 
 #ifndef CFG_TUD_ENDPOINT0_SIZE
-  #define CFG_TUD_ENDPOINT0_SIZE 64
+#define CFG_TUD_ENDPOINT0_SIZE 64
 #endif
 
 //------------- CLASS -------------//
@@ -136,12 +136,12 @@ extern "C" {
 #define CFG_TUD_VENDOR 0
 
 #if USE_CDC
-  #define CFG_TUD_CDC 1
-  // CDC FIFO size of TX and RX
-  #define CFG_TUD_CDC_RX_BUFSIZE (TUD_OPT_HIGH_SPEED ? 512 : 256)
-  #define CFG_TUD_CDC_TX_BUFSIZE (TUD_OPT_HIGH_SPEED ? 512 : 256)
+#define CFG_TUD_CDC 1
+// CDC FIFO size of TX and RX
+#define CFG_TUD_CDC_RX_BUFSIZE (TUD_OPT_HIGH_SPEED ? 512 : 256)
+#define CFG_TUD_CDC_TX_BUFSIZE (TUD_OPT_HIGH_SPEED ? 512 : 256)
 #else
-  #define CFG_TUD_CDC 0
+#define CFG_TUD_CDC 0
 #endif
 
 // HID buffer size Should be sufficient to hold ID (if any) + Data
@@ -154,8 +154,7 @@ extern "C" {
 // HOST CONFIGURATION
 //--------------------------------------------------------------------
 
-
-//set host pin 16 17
+// set host pin 16 17
 #define USE_ADAFRUIT_FEATHER_RP2040_USBHOST 1
 
 // VBUS enable pin
@@ -165,16 +164,16 @@ extern "C" {
 #define CFG_TUH_ENUMERATION_BUFSIZE 256
 
 #ifndef CFG_TUH_MEM_SECTION
-  #define CFG_TUH_MEM_SECTION
+#define CFG_TUH_MEM_SECTION
 #endif
 
 #ifndef CFG_TUH_MEM_ALIGN
-  #define CFG_TUH_MEM_ALIGN __attribute__((aligned(4)))
+#define CFG_TUH_MEM_ALIGN __attribute__((aligned(4)))
 #endif
 
 #define CFG_TUH_HUB 1
 // max device support (excluding hub device)
-#define CFG_TUH_DEVICE_MAX (CFG_TUH_HUB ? 4 : 1)// hub typically has 4 ports
+#define CFG_TUH_DEVICE_MAX (CFG_TUH_HUB ? 4 : 1) // hub typically has 4 ports
 
 #define CFG_TUH_HID (3 * CFG_TUH_DEVICE_MAX)
 #define CFG_TUH_HID_EPIN_BUFSIZE 256

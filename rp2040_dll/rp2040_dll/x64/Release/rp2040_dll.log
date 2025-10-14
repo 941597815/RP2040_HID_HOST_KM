@@ -1,7 +1,0 @@
-﻿  rp2040.cpp
-    正在创建库 F:\Work\C\RP2040_HID_HOST_KM\rp2040_dll\x64\Release\rp2040_dll.lib 和对象 F:\Work\C\RP2040_HID_HOST_KM\rp2040_dll\x64\Release\rp2040_dll.exp
-  正在生成代码
-  Previous IPDB was built with incompatible compiler, fall back to full compilation.
-  All 249 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  已完成代码的生成
-  rp2040_dll.vcxproj -> F:\Work\C\RP2040_HID_HOST_KM\rp2040_dll\x64\Release\rp2040_dll.dll

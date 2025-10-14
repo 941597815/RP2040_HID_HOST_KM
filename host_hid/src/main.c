@@ -1,31 +1,3 @@
-/*
- * The MIT License (MIT)
- *
- * Copyright (c) 2019 Ha Thach (tinyusb.org)
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- * THE SOFTWARE.
- *
- */
-
-// This example runs both host and device concurrently. The USB host receive
-// reports from HID device and print it out over USB Device CDC interface.
-
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -151,12 +123,10 @@ static void cdc_debug_print(const char *fmt, ...)
     uint32_t avail = tud_cdc_write_available();
     if (avail == 0)
     {
-      /*  FIFO 满，给一次 USB 中断机会就溜
-                仍然写不完也直接放弃，保证不卡死 */
       tud_task(); // tinyusb device task
       avail = tud_cdc_write_available();
       if (avail == 0)
-        break; // ← 不纠结，直接跳出
+        break;
     }
     uint32_t chunk = (len > avail) ? avail : len;
     tud_cdc_write(p, chunk);
@@ -224,7 +194,7 @@ int main(void)
   // 初始化队列
   queue_init(&keyboard_report_queue, sizeof(keyboard_report_t), KEYBOARD_QUEUE_SIZE);
   queue_init(&mouse_report_queue, sizeof(mouse_report_t), MOUSE_QUEUE_SIZE);
-  queue_init(&gamepad_report_queue, sizeof(mouse_report_t), GAMEPAD_QUEUE_SIZE);
+  queue_init(&gamepad_report_queue, sizeof(gamepad_report_t), GAMEPAD_QUEUE_SIZE);
 
   // 初始化设备栈
   tusb_rhport_init_t dev_init = {

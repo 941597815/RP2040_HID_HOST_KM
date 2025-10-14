@@ -2,7 +2,7 @@ import hid
 import time
 
 
-VID_PID = (0x1234, 0x4321)  # 你的设备 VID/PID
+VID_PID = (0x046D, 0xC08B)  # 你的设备 VID/PID
 
 
 def precise_sleep(duration, precision: float = 0.0001, get_now=time.perf_counter):

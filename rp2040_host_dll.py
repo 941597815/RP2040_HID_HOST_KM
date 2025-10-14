@@ -16,7 +16,7 @@ from typing import Tuple, List
 # ------------------ DLL 加载 ------------------
 _dll = ctypes.CDLL(
     os.path.join(
-        os.path.dirname(__file__), "./rp2040_dll/x64/Release/rp2040_dll.dll"
+        os.path.dirname(__file__), "./rp2040_host_dll/x64/Release/rp2040_host_dll.dll"
     )  # 修改为您的DLL路径
 )
 
@@ -89,7 +89,7 @@ _dll.HID_ParseMouseReport.argtypes = [
 _dll.HID_ParseMouseReport.restype = ctypes.c_bool
 
 # ------------------ 静态常量 ------------------
-_DEFAULT_VID_PID = (0x1234, 0x4321)  # 替换为您的设备VID/PID
+_DEFAULT_VID_PID = (0x046D, 0xC08B)  # 替换为您的设备VID/PID
 
 
 # ------------------ 顶层类 ------------------
@@ -615,7 +615,7 @@ if __name__ == "__main__":
 
         # # 测试鼠标
         # print("测试鼠标移动")
-        # HIDDevice.mouse.move(100, 50)
+        HIDDevice.mouse.move(100, 50)
         # time.sleep(1)
 
         # print("测试鼠标点击")

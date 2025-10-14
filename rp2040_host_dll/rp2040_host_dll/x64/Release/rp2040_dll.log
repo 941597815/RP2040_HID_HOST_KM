@@ -1,0 +1,8 @@
+﻿  rp2040.cpp
+    正在创建库 F:\Work\C\RP2040_HID_HOST_KM\rp2040_host_dll\x64\Release\rp2040_host_dll.lib 和对象 F:\Work\C\RP2040_HID_HOST_KM\rp2040_host_dll\x64\Release\rp2040_host_dll.exp
+  正在生成代码
+  247 of 249 functions (99.2%) were compiled, the rest were copied from previous compilation.
+    4 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  已完成代码的生成
+  rp2040_dll.vcxproj -> F:\Work\C\RP2040_HID_HOST_KM\rp2040_host_dll\x64\Release\rp2040_host_dll.dll

@@ -40,7 +40,7 @@ extern "C"
 #define USB_VID 0x046D // Example VID
 #define USB_PID 0xC08B // Example PID
 
-// Device name, manufacturer, and serial number
+// Device name, manufacturer, and SN
 #define USB_MANUFACTURER "Logitech"          // 生产商
 #define USB_PRODUCT "G502 HERO Gaming Mouse" // 设备名
 #define USB_SERIAL_NUMBER "S1F8M-2Q5KL-7CD"  // SN

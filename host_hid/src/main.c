@@ -278,9 +278,6 @@ int main(void)
         success = tud_hid_n_mouse_report(REPORT_ID_MOUSE, 0, rpt.buttons, rpt.x, rpt.y, rpt.wheel, 0);
       }
 
-      // 更新鼠标最后状态last_rpt
-      last_rpt = rpt;
-
       if (!success)
       {
         CDC_LOG("发送失败，尝试重新放回队列\n");
@@ -377,11 +374,11 @@ void process_hid_report(uint8_t const *report, uint16_t len)
     int8_t y = (int8_t)payload[2];
     int8_t wheel = (int8_t)payload[3];
     // int8_t pan = (int8_t) payload[4];
-    // tud_hid_mouse_report(REPORT_ID_MOUSE, buttons, x, y, wheel, pan);
     // tud_hid_n_mouse_report(REPORT_ID_MOUSE, 0, buttons, x, y, wheel, pan);
     mouse_report_t rpt;
     if (queue_try_remove(&mouse_report_queue, &rpt))
     {
+      // CDC_LOG("rpt.buttons=%d，buttons=%d\n", rpt.buttons, buttons);
       buttons = rpt.buttons | buttons;
       x = rpt.x + x;
       y = rpt.y + y;
@@ -390,7 +387,8 @@ void process_hid_report(uint8_t const *report, uint16_t len)
     else
     {
       // 保持物理鼠标最后的按键状态
-      buttons = last_rpt.buttons;
+      CDC_LOG("last_rpt.buttons=%d，buttons=%d\n", last_rpt.buttons, buttons);
+      buttons = last_rpt.buttons | buttons;
     }
     // tud_hid_n_mouse_report(REPORT_ID_MOUSE, 0, buttons, x, y, wheel, pan);
     // 4. 将报告加入队列
@@ -406,7 +404,7 @@ void process_hid_report(uint8_t const *report, uint16_t len)
     }
     else
     {
-      CDC_LOG("Mouse report queued: buttons=%d x=%d y=%d wheel=%d\n", rpt.buttons, rpt.x, rpt.y, rpt.wheel);
+      CDC_LOG("Mouse report queued: buttons=%d x=%d y=%d wheel=%d\n", rpt_.buttons, rpt_.x, rpt_.y, rpt_.wheel);
     }
 
     break;
@@ -873,6 +871,8 @@ void tuh_hid_report_received_cb(uint8_t dev_addr, uint8_t instance, uint8_t cons
     else
     {
       CDC_LOG("Mouse report queued: buttons=%d x=%d y=%d wheel=%d\n", rpt.buttons, rpt.x, rpt.y, rpt.wheel);
+      // 更新鼠标最后状态last_rpt
+      last_rpt = rpt;
     }
   }
   else

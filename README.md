@@ -45,7 +45,7 @@ python tools/get_deps.py rp2040
  cd build
  #如果使用rp2040
  cmake -G Ninja -DBOARD=raspberry_pi_pico ..
- #如果使用rp2350，同时需要修改RP2040_HID_HOST_KM\host_hid\tinyusb\hw\bsp\rp2040目录下的board.h #define PICO_DEFAULT_PIO_USB_DP_PIN 12
+ #如果使用rp2350，同时需要修改RP2040_HID_HOST_KM\host_hid\tinyusb\hw\bsp\rp2040目录下的board.h #define PICO_DEFAULT_PIO_USB_DP_PIN 16 --> 12
  cmake -G Ninja -DBOARD=raspberry_pi_pico2 ..
  ninja
 ```
